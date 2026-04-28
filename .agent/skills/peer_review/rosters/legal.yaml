@@ -1,0 +1,31 @@
+name: "legal"
+display_name: "Legal Document Review"
+description: "Reviews from Compliance, Precedent, and Risk perspectives. Best for contracts, policies, terms of service, and regulatory documents."
+version: "2.0"
+
+meta_gate:
+  - name: "Completeness"
+    question: "Does the document cover all necessary legal elements for its type? Are there gaps?"
+  - name: "Enforceability"
+    question: "Are the terms clear, specific, and legally enforceable in the relevant jurisdiction(s)?"
+  - name: "Risk Exposure"
+    question: "Does this document adequately protect the relevant party? Are liability gaps present?"
+
+reviewers:
+  - name: "Compliance"
+    prompt: "prompts/reviewer_compliance.md"
+    title: "Regulatory Compliance Analyst"
+    role: "Regulatory & Compliance Assessment"
+    focus_summary: "Regulatory requirements, industry standards, mandatory disclosures, jurisdictional rules"
+
+  - name: "Precedent"
+    prompt: "prompts/reviewer_precedent.md"
+    title: "Legal Research Analyst"
+    role: "Legal Precedent & Standards Assessment"
+    focus_summary: "Industry-standard terms, common clauses, boilerplate gaps, definition quality"
+
+  - name: "Legal Risk"
+    prompt: "prompts/reviewer_legal_risk.md"
+    title: "Risk & Liability Analyst"
+    role: "Liability & Risk Assessment"
+    focus_summary: "Liability exposure, indemnification, dispute resolution, termination rights"

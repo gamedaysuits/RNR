@@ -1,0 +1,31 @@
+name: "creative"
+display_name: "Creative Writing Review"
+description: "Reviews from Craft, Narrative, and Audience perspectives. Best for writing portfolios, scripts, articles, blog posts, and creative content."
+version: "2.0"
+
+meta_gate:
+  - name: "Voice Consistency"
+    question: "Is the authorial voice distinct, consistent, and appropriate for the genre/format?"
+  - name: "Audience Alignment"
+    question: "Will the target audience connect with this content? Is the tone and register appropriate?"
+  - name: "Structural Integrity"
+    question: "Does the piece hold together as a whole? Is the structure serving the content?"
+
+reviewers:
+  - name: "Craft"
+    prompt: "prompts/reviewer_craft.md"
+    title: "Senior Editor"
+    role: "Writing Craft & Technical Quality Assessment"
+    focus_summary: "Prose quality, grammar, word choice, pacing, show-don't-tell, dialogue"
+
+  - name: "Narrative"
+    prompt: "prompts/reviewer_narrative.md"
+    title: "Story Development Editor"
+    role: "Narrative Structure & Story Assessment"
+    focus_summary: "Arc, tension, character, theme, coherence, opening/closing strength"
+
+  - name: "Audience"
+    prompt: "prompts/reviewer_audience.md"
+    title: "Audience Development Specialist"
+    role: "Audience & Market Fit Assessment"
+    focus_summary: "Target reader alignment, genre conventions, hook strength, shareability"

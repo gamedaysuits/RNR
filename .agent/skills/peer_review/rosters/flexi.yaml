@@ -1,0 +1,118 @@
+name: "flexi"
+display_name: "Flexible Custom Review"
+description: "User-defined reviewer panel using the parameterized template. Copy this file to your project root as .rnr-reviewers.yaml and customize the reviewers, focus areas, and meta-gate to match your domain."
+version: "2.0"
+
+# INSTRUCTIONS:
+# 1. Copy this file to your project root as ".rnr-reviewers.yaml"
+# 2. Customize the meta_gate checks for your domain
+# 3. Define 2-5 reviewers with domain-specific focus areas
+# 4. Each reviewer uses the parameterized reviewer_template.md prompt
+# 5. Run /peer-review and your custom roster will be auto-detected
+
+meta_gate:
+  - name: "Core Thesis"
+    question: "Is the central argument or purpose sound and well-supported?"
+  - name: "Completeness"
+    question: "Are all necessary aspects covered with adequate depth?"
+  - name: "Actionability"
+    question: "Can the reader act on this document as-is? Are next steps clear?"
+
+reviewers:
+  - name: "Reviewer A"
+    prompt: "prompts/reviewer_template.md"
+    title: "Domain Expert"
+    role: "Primary Domain Assessment"
+    focus_summary: "Core domain accuracy, conventions, expert-level scrutiny"
+    focus_areas: |
+      ### 1. Domain Accuracy
+      - Are claims and assertions factually correct?
+      - Are domain-specific terms and concepts used properly?
+      - Are there errors or misleading statements?
+
+      ### 2. Depth & Rigor
+      - Is the analysis sufficiently deep for the audience?
+      - Are conclusions well-supported by evidence or reasoning?
+      - Are nuances and edge cases acknowledged?
+
+      ### 3. Currency
+      - Is the information current and relevant?
+      - Are references and citations up to date?
+    severity_definitions: |
+      | Level | Definition |
+      |-------|------------|
+      | **CRITICAL** | Fundamental factual error or missing core element |
+      | **MAJOR** | Significant gap or error that undermines credibility |
+      | **MINOR** | Small inaccuracy or omission that should be corrected |
+      | **SUGGESTION** | Enhancement that would strengthen the document |
+    guidelines: |
+      1. **Verify claims** — Check factual statements against domain knowledge
+      2. **Be specific** — Cite exact problems with page/section references
+      3. **Be constructive** — Suggest corrections, not just flag errors
+      4. **Be independent** — Your review must stand alone
+
+  - name: "Reviewer B"
+    prompt: "prompts/reviewer_template.md"
+    title: "Structure & Clarity Analyst"
+    role: "Structure, Clarity & Readability Assessment"
+    focus_summary: "Organization, flow, readability, audience alignment"
+    focus_areas: |
+      ### 1. Organization
+      - Is the document logically structured?
+      - Does the flow of information make sense?
+      - Are sections well-ordered and properly scoped?
+
+      ### 2. Clarity
+      - Is the language clear and unambiguous?
+      - Are complex concepts explained adequately?
+      - Is jargon appropriate for the audience?
+
+      ### 3. Completeness
+      - Are there obvious gaps or missing sections?
+      - Does the document fulfill its stated purpose?
+      - Is the scope clearly defined and respected?
+    severity_definitions: |
+      | Level | Definition |
+      |-------|------------|
+      | **CRITICAL** | Document structure defeats its purpose or audience |
+      | **MAJOR** | Significant clarity or organizational issue |
+      | **MINOR** | Small readability issue that should be improved |
+      | **SUGGESTION** | Polish that would enhance reader experience |
+    guidelines: |
+      1. **Read as the audience** — Evaluate from the target reader's perspective
+      2. **Follow the thread** — Check that the narrative/argument flows logically
+      3. **Flag ambiguity** — Identify statements that could be misinterpreted
+      4. **Be independent** — Your review must stand alone
+
+  - name: "Reviewer C"
+    prompt: "prompts/reviewer_template.md"
+    title: "Feasibility & Impact Analyst"
+    role: "Feasibility, Impact & Risk Assessment"
+    focus_summary: "Practicality, risks, assumptions, impact assessment"
+    focus_areas: |
+      ### 1. Feasibility
+      - Are proposed actions, timelines, or goals realistic?
+      - Are resource requirements accounted for?
+      - Are dependencies and prerequisites identified?
+
+      ### 2. Assumptions
+      - Are underlying assumptions stated explicitly?
+      - Are they reasonable and well-supported?
+      - What happens if key assumptions are wrong?
+
+      ### 3. Risk & Impact
+      - Are risks identified and mitigated?
+      - What are the consequences of failure?
+      - Are success criteria defined and measurable?
+    severity_definitions: |
+      | Level | Definition |
+      |-------|------------|
+      | **CRITICAL** | Fundamental feasibility issue or unacknowledged fatal risk |
+      | **MAJOR** | Significant risk or unrealistic assumption |
+      | **MINOR** | Small feasibility concern that should be noted |
+      | **SUGGESTION** | Risk mitigation that would strengthen the plan |
+    guidelines: |
+      1. **Stress-test assumptions** — What breaks if this assumption is wrong?
+      2. **Think about failure** — What's the worst case?
+      3. **Be practical** — Focus on real-world constraints
+      4. **Be independent** — Your review must stand alone

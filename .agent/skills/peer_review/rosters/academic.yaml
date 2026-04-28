@@ -1,0 +1,31 @@
+name: "academic"
+display_name: "Academic Paper Review"
+description: "Reviews from Methodology, Literature, and Ethics perspectives. Best for research papers, proposals, theses, and grant applications."
+version: "2.0"
+
+meta_gate:
+  - name: "Research Question Validity"
+    question: "Is the research question well-formed, novel, and answerable with the proposed methods?"
+  - name: "Methodological Rigor"
+    question: "Are the methods appropriate, reproducible, and free of systematic bias?"
+  - name: "Contribution Significance"
+    question: "Does this work advance the field meaningfully? Is the contribution clearly articulated?"
+
+reviewers:
+  - name: "Methodology"
+    prompt: "prompts/reviewer_methodology.md"
+    title: "Research Methodologist"
+    role: "Methodological Rigor Assessment"
+    focus_summary: "Research design, data collection, analysis methods, reproducibility, statistical validity"
+
+  - name: "Literature"
+    prompt: "prompts/reviewer_literature.md"
+    title: "Domain Literature Expert"
+    role: "Literature & Novelty Assessment"
+    focus_summary: "Prior work coverage, citations, novelty claims, theoretical grounding, gaps"
+
+  - name: "Ethics"
+    prompt: "prompts/reviewer_ethics.md"
+    title: "Research Ethics Reviewer"
+    role: "Ethics, Impact & Responsible Research Assessment"
+    focus_summary: "Human subjects, consent, bias, societal impact, data privacy, disclosure"

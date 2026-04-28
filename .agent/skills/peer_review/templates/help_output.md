@@ -1,6 +1,7 @@
 # R&R Peer Review — Help
 
-A multi-agent blind peer review system for iterative document improvement.
+A general-purpose multi-agent blind peer review system for iterative improvement
+of documents, vaults, codebases, and multi-file projects.
 
 ---
 
@@ -8,42 +9,100 @@ A multi-agent blind peer review system for iterative document improvement.
 
 | Command | Description |
 |---------|-------------|
-| `/peer-review <doc>` | Start peer review of a document |
+| `/peer-review <target>` | Start peer review of a target (file, dir, manifest) |
 | `/peer-review --help` | Show this help message |
 | `/peer-review --trust` | Skip pattern checks (rapid iteration mode) |
 | `/peer-review --resume` | Resume an interrupted session |
 | `/peer-review --max-iter N` | Set maximum iterations (default: 10) |
+| `/peer-review --type <type>` | Override auto-detected input type |
+| `/peer-review --roster <name>` | Select reviewer roster (default: software) |
 | `/peer-review --cleanup` | Remove sessions older than 30 days |
 | `/peer-review --cleanup --days N` | Remove sessions older than N days |
 
 ---
 
-## Example Session
+## Input Types
 
+| Type | Description | Example |
+|------|-------------|---------|
+| `single-file` | One document | `./my-prd.md` |
+| `vault` | Directory of Markdown files | `./prospectus/` |
+| `codebase` | Source code project | `./src/` |
+| `manifest` | Curated file list | `./.rnr-manifest.json` |
+
+Input type is auto-detected but can be overridden with `--type`.
+
+---
+
+## Reviewer Rosters
+
+| Roster | Reviewers | Best For |
+|--------|-----------|----------|
+| `software` ★ | Technical, Product, Ops | PRDs, RFCs, specs |
+| `business` | Financial, Market, Risk | Business plans |
+| `code` | Quality, Security, Architecture | Codebases |
+| `academic` | Methodology, Literature, Ethics | Papers |
+| `creative` | Craft, Narrative, Audience | Writing |
+| `legal` | Compliance, Precedent, Risk | Contracts |
+| `flexi` | User-defined | Anything |
+
+★ = default roster
+
+### Custom Roster
+
+Place a `.rnr-reviewers.yaml` in your project root to define custom reviewers.
+Copy `rosters/flexi.yaml` as a starting template.
+
+---
+
+## Example Sessions
+
+### Single File
 ```
 /peer-review ./my-prd.md
 
 📂 Session: 20260131-101500-a1b2
-📊 Document: 247 words (~2 min)
+📊 Input: ./my-prd.md (single-file, 247 words)
+🎭 Roster: software (Technical, Product, Operations)
 
 ITER 1: FAIL/FAIL/PASS → REVISE(4)
 ITER 2: PASS/PASS/PASS → ✅ ACCEPT
+```
 
-Output: .peer_review/20260131-101500-a1b2/final/document.md
+### Vault with Business Roster
+```
+/peer-review ./prospectus/ --roster business
+
+📂 Session: 20260131-110000-c3d4
+📊 Input: ./prospectus/ (vault, 12 files, 8200 words)
+🎭 Roster: business (Financial Analyst, Market Strategist, Risk Assessor)
+
+ITER 1: FAIL/PASS/FAIL → REVISE(5)
+ITER 2: PASS/PASS/PASS → ✅ ACCEPT
+```
+
+### Codebase
+```
+/peer-review ./src/ --type codebase --roster code
+
+📂 Session: 20260131-120000-e5f6
+📊 Input: ./src/ (codebase, 24 files, 6100 words)
+🎭 Roster: code (Code Quality, Security Auditor, Architecture)
+
+ITER 1: PASS/FAIL/PASS → REVISE(2)
+ITER 2: PASS/PASS/PASS → ✅ ACCEPT
 ```
 
 ---
 
 ## How It Works
 
-1. **Submit** — You provide a document for review
-2. **Validate** — System checks document meets requirements
-3. **Review** — Three blind reviewers evaluate independently:
-   - Technical Architect (feasibility, architecture)
-   - Product Manager (user experience, scope)
-   - DevOps/Security (operations, security, timeline)
-4. **Synthesize** — Area Chair consolidates feedback
-5. **Decide** — ACCEPT (done) or REVISE (iterate)
+1. **Submit** — You provide a target for review
+2. **Adapt** — System detects input type and assembles a Review Package
+3. **Validate** — Checks content meets requirements
+4. **Review** — N blind reviewers (from your roster) evaluate independently
+5. **Synthesize** — Area Chair consolidates feedback with domain-specific quality checks
+6. **Decide** — ACCEPT (done), REVISE (iterate), or ESCALATE (max iterations)
 
 ---
 
@@ -53,7 +112,7 @@ Output: .peer_review/20260131-101500-a1b2/final/document.md
 |-------------|-------|
 | Minimum length | 50 words |
 | Maximum length | ~50,000 tokens (soft limit) |
-| Recommended | 200-2,000 words |
+| Recommended | 200-2,000 words per document |
 | Format | Markdown preferred |
 | Encoding | UTF-8 |
 
@@ -84,38 +143,30 @@ Output: .peer_review/20260131-101500-a1b2/final/document.md
 
 ## Session Files
 
-Your review session creates files in `.peer_review/{session_id}/`:
-
 ```
 .peer_review/{session_id}/
 ├── state.json              # Session state
-├── input/original.md       # Your original document
-├── iter_1/                 # Iteration 1 files
+├── input/                  # Original input
+│   ├── original.md         # (single-file)
+│   └── package/            # (multi-file inputs)
+├── iter_N/                 # Iteration files
 │   ├── document.md
-│   ├── review_technical.md
-│   ├── review_product.md
-│   ├── review_ops.md
-│   └── synthesis.md
-└── final/document.md       # Approved final version
+│   ├── review_{name}.md    # Per-reviewer output
+│   └── synthesis.md        # Area Chair synthesis
+└── final/document.md       # Approved version
 ```
 
 ---
 
 ## Tips
 
-- **Write clear PRDs** — Well-structured documents get faster approvals
-- **Use --trust** — Skip security checks during rapid iteration
-- **Use --resume** — Continue if your session is interrupted
+- **Vault reviews** — Obsidian vaults and wiki PRDs work great
+- **Use `--roster`** — Match reviewers to your content domain
+- **Custom rosters** — Drop `.rnr-reviewers.yaml` in your project root
+- **Use `--trust`** — Skip security checks during rapid iteration
+- **Use `--resume`** — Continue if your session is interrupted
 - **Read reviews** — Each reviewer provides specific, actionable feedback
-- **Iterate quickly** — Address all issues in each revision
 
 ---
 
-## More Information
-
-See `END-USER-GUIDE.md` for detailed usage instructions.
-See `TROUBLESHOOTING.md` for common issues and solutions.
-
----
-
-*R&R Peer Review v1.0*
+*R&R Peer Review v2.0*

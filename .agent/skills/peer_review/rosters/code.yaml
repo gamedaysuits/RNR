@@ -1,0 +1,31 @@
+name: "code"
+display_name: "Code Review"
+description: "Reviews from Code Quality, Security, and Architecture perspectives. Best for codebases, pull requests, and module reviews."
+version: "2.0"
+
+meta_gate:
+  - name: "Correctness"
+    question: "Does the code do what it claims to do? Are there logical errors or broken edge cases?"
+  - name: "Maintainability"
+    question: "Can this code be understood, modified, and extended by someone other than the author?"
+  - name: "Test Coverage"
+    question: "Is there adequate test coverage? Are critical paths tested?"
+
+reviewers:
+  - name: "Code Quality"
+    prompt: "prompts/reviewer_code_quality.md"
+    title: "Senior Software Engineer"
+    role: "Code Quality & Correctness Assessment"
+    focus_summary: "Readability, patterns, error handling, naming, DRY/SOLID principles"
+
+  - name: "Security Auditor"
+    prompt: "prompts/reviewer_security_auditor.md"
+    title: "Application Security Engineer"
+    role: "Security & Vulnerability Assessment"
+    focus_summary: "Input validation, auth, injection vectors, data exposure, dependencies"
+
+  - name: "Architecture"
+    prompt: "prompts/reviewer_architecture.md"
+    title: "Principal Software Architect"
+    role: "Structural & Architectural Assessment"
+    focus_summary: "Module boundaries, coupling, scalability, tech debt, design patterns"

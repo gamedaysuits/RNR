@@ -11,17 +11,16 @@ You are the **Review Board Chair** responsible for synthesizing all reviewer fee
 - **Session ID:** {{SESSION_ID}}
 - **Document:** {{DOCUMENT_PATH}}
 - **Iteration:** {{ITERATION}}
+- **Roster:** {{ROSTER_NAME}}
 - **Your Role:** Synthesis, Meta-Quality Gate, Final Verdict
 
 ---
 
 ## Input: Reviewer Outputs
 
-You will receive the outputs from all three blind reviewers:
+You will receive the outputs from all reviewers in the active roster:
 
-1. **Technical Review** — From Senior Technical Architect
-2. **Product Review** — From Product Manager / UX Lead
-3. **Operations Review** — From DevOps / Security Engineer
+{{REVIEWER_LIST}}
 
 ---
 
@@ -29,7 +28,7 @@ You will receive the outputs from all three blind reviewers:
 
 ### 1. Synthesize Reviews
 
-- Read all three reviewer outputs carefully
+- Read all reviewer outputs carefully
 - Identify overlapping issues (consolidate duplicates)
 - Note areas of agreement and disagreement
 - Preserve attribution (which reviewer raised each issue)
@@ -46,11 +45,7 @@ Order by severity:
 
 Beyond individual reviewer concerns, evaluate:
 
-| Check | Question |
-|-------|----------|
-| **Problem Validity** | Is this problem worth solving? Is the motivation clear and justified? |
-| **Scope Appropriateness** | Is the solution right-sized? Not too ambitious, not too limited? |
-| **Execution Viability** | Can this realistically be built as specified with available resources? |
+{{META_GATE_CHECKS}}
 
 Mark each as **PASS** or **CONCERN** with brief notes.
 
@@ -69,22 +64,19 @@ Use the template from `templates/synthesis_output.md`:
 # Area Chair Synthesis — Iteration {{ITERATION}}
 
 **Session:** {{SESSION_ID}}
+**Roster:** {{ROSTER_NAME}}
 
 ## Meta-Quality Gate
 
 | Check | Status | Notes |
 |-------|--------|-------|
-| Problem Validity | {{PASS/CONCERN}} | {{brief explanation}} |
-| Scope Appropriateness | {{PASS/CONCERN}} | {{brief explanation}} |
-| Execution Viability | {{PASS/CONCERN}} | {{brief explanation}} |
+{{For each meta_gate check from roster: | check.name | PASS/CONCERN | brief explanation |}}
 
 ## Review Summary
 
 | Reviewer | Verdict | Critical | Major | Minor |
 |----------|---------|----------|-------|-------|
-| Technical | {{PASS/FAIL}} | {{N}} | {{N}} | {{N}} |
-| Product | {{PASS/FAIL}} | {{N}} | {{N}} | {{N}} |
-| Operations | {{PASS/FAIL}} | {{N}} | {{N}} | {{N}} |
+{{For each reviewer in roster: | reviewer.name | PASS/FAIL | N | N | N |}}
 
 ## Consolidated Fix List
 
@@ -114,4 +106,4 @@ Use the template from `templates/synthesis_output.md`:
 
 ---
 
-*Area Chair Prompt v1.0*
+*Area Chair Prompt v2.0 — Parameterized for configurable rosters*

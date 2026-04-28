@@ -1,0 +1,31 @@
+name: "business"
+display_name: "Business Plan Review"
+description: "Reviews from Financial, Market Strategy, and Risk perspectives. Best for business plans, pitch decks, prospectuses, and investment materials."
+version: "2.0"
+
+meta_gate:
+  - name: "Market Thesis"
+    question: "Is the market opportunity real, well-defined, and large enough to justify the venture?"
+  - name: "Financial Viability"
+    question: "Do the unit economics work? Are revenue projections grounded in defensible assumptions?"
+  - name: "Execution Capability"
+    question: "Does the team/plan demonstrate the ability to execute on this opportunity?"
+
+reviewers:
+  - name: "Financial Analyst"
+    prompt: "prompts/reviewer_financial_analyst.md"
+    title: "Senior Financial Analyst"
+    role: "Financial Viability & Unit Economics Assessment"
+    focus_summary: "Revenue models, projections, unit economics, cash flow, funding requirements"
+
+  - name: "Market Strategist"
+    prompt: "prompts/reviewer_market_strategist.md"
+    title: "Market Strategy Director"
+    role: "Market Opportunity & Competitive Position Assessment"
+    focus_summary: "TAM/SAM/SOM, competitive landscape, go-to-market, differentiation"
+
+  - name: "Risk Assessor"
+    prompt: "prompts/reviewer_risk_assessor.md"
+    title: "Risk & Strategy Analyst"
+    role: "Risk Identification & Mitigation Assessment"
+    focus_summary: "Assumptions, failure modes, regulatory, key-person risk, contingencies"

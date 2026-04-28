@@ -1,0 +1,37 @@
+{
+  "name": "Groundtruth Prospectus Review",
+  "description": "Curated files from the Groundtruth documentation vault for peer review",
+  "roster": "business",
+  "files": [
+    {
+      "path": "prospectus/00-OVERVIEW.md",
+      "role": "primary",
+      "context": "Executive summary and product vision"
+    },
+    {
+      "path": "prospectus/03-MARKET-ANALYSIS.md",
+      "role": "primary",
+      "context": "TAM/SAM/SOM, competitive landscape"
+    },
+    {
+      "path": "prospectus/05-TECHNOLOGY.md",
+      "role": "primary",
+      "context": "Architecture and data pipeline"
+    },
+    {
+      "path": "prospectus/07-FINANCIAL-MODEL.md",
+      "role": "primary",
+      "context": "Revenue model, unit economics, projections"
+    },
+    {
+      "path": "prospectus/08-RISK-REGISTER.md",
+      "role": "supporting",
+      "context": "Risk analysis and mitigation strategies"
+    },
+    {
+      "path": "prospectus/09-APPENDIX-DATA-SOURCES.md",
+      "role": "reference",
+      "context": "Data source inventory, not core review material"
+    }
+  ]
+}

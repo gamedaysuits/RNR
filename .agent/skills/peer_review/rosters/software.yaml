@@ -1,0 +1,31 @@
+name: "software"
+display_name: "Software Product Review"
+description: "Reviews from Technical, Product, and Operations perspectives. Best for PRDs, RFCs, technical specifications, and product documentation."
+version: "2.0"
+
+meta_gate:
+  - name: "Problem Validity"
+    question: "Is this problem worth solving? Is the motivation clear and justified?"
+  - name: "Scope Appropriateness"
+    question: "Is the solution right-sized? Not too ambitious, not too limited?"
+  - name: "Execution Viability"
+    question: "Can this realistically be built as specified with available resources?"
+
+reviewers:
+  - name: "Technical"
+    prompt: "prompts/reviewer_technical.md"
+    title: "Senior Technical Architect"
+    role: "Technical Feasibility Assessment"
+    focus_summary: "Architecture, feasibility, complexity, dependencies, performance"
+
+  - name: "Product"
+    prompt: "prompts/reviewer_product.md"
+    title: "Product Manager / UX Lead"
+    role: "Product & User Experience Assessment"
+    focus_summary: "User problems, flows, edge cases, scope, market fit"
+
+  - name: "Operations"
+    prompt: "prompts/reviewer_ops.md"
+    title: "DevOps / Security Engineer"
+    role: "Operations, Security & Feasibility Assessment"
+    focus_summary: "Security, timeline, resources, operational complexity, deployment"
